@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html ng-app="angularformproperties">
+<head>
+    <meta charset="utf-8" />
+    <title>AngularJS - Form Validation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+    <script src="index.js"></script>
+    <style>
+        input[name=invalidvalid].ng-invalid {
+            background-color: lightpink;
+        }
+
+        input[name=invalidvalid].ng-valid {
+            background-color: lightgreen;
+        }
+          input[name=pristinedirty].ng-pristine {
+            background-color: lightpink;
+        }
+          input[name=pristinedirty].ng-pristine {
+            background-color: lightpink;
+        }
+
+        input[name=pristinedirty].ng-dirty {
+            background-color: lightblue;
+        }
+           input[name=untouchedtouched].ng-untouched {
+            background-color: lightpink;
+        }
+
+        input[name=untouchedtouched].ng-touched {
+            background-color: lightseagreen;
+        }
+    </style>
+</head>
+<body ng-controller="FormPropertiesController">
+    <form name="formvalidation" novalidate>
+        <div class="container">
+            <div class="col-sm-8 col-sm-offset-2">
+
+                <!-- Page Header -->
+                <div class="page-header"><h1>AngularJS - Form Properties</h1></div>
+                <div class="row">
+                    <div class="form-group" ng-class="{ 'has-error' : formvalidation.invalidvalid.$invalid }">
+                        <label>ng-invalid & ng-valid</label>
+                        <!-- invalid means it checks the condition with the directives and if it is not satisfied with criteria - it is invalid and 
+                             if it meets the criteria - it is valid which means valid -->
+                        <input type="text" name="invalidvalid" class="form-control" ng-model="Info.Name" ng-pattern="/^[a-zA-Z]*$/" ng-minlength="4" ng-maxlength="10" required>
+                        <p style="color:red" ng-show="formvalidation.invalidvalid.$error.maxlength && !formvalidation.invalidvalid.$error.pattern">Name Should Contain Maximum 10 Characters</p>
+                        <p style="color:red" ng-show="formvalidation.invalidvalid.$error.minlength && !formvalidation.invalidvalid.$error.pattern">Name Should Contain Minimum 3 Characters</p>
+                        <p style="color:red" ng-show="formvalidation.invalidvalid.$error.pattern">Name Should Contain Only Letters</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group" ng-class="{ 'has-error' : formvalidation.pristinedirty.$invalid }">
+                        <label>ng-pristine & ng-dirty</label>
+                        <!-- pristine means the state after page is load which is not any keypress happened in the inpout field after page load And
+                            dirty means atleast one key press have to be done -->
+                        <input type="text" name="pristinedirty" class="form-control" ng-model="Info.PANNumber" >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group" ng-class="{ 'has-error' : formvalidation.untouchedtouched.$invalid }">
+                        <label>ng-untouched & ng-touched</label>
+                        <!-- untouched means before the control enters the input field And touched means after the control enters the input field -->
+                        <input type="text" name="untouchedtouched" class="form-control" ng-model="Info.PhoneNumber">
+                    </div>
+                </div>
+                   
+                </div>
+        </div>
+    </form>
+
+</body>
+</html>
